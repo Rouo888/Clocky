@@ -18,15 +18,15 @@ This document defines the coding conventions, header authoring rules, and archit
 
 ## 2. Constants & Extern Declarations (`Defines.h`)
 
-- Define shared constants and keys (such as `NSUserDefaults` keys) in `Defines.h` / `Defines.m` using the `CKT_EXTERN` macro and function accessors rather than file-local `static` variables:
+- Define shared constants and keys (such as `NSUserDefaults` keys) in `Defines.h` / `Defines.m` using the `CLKY_EXTERN` macro and function accessors rather than file-local `static` variables:
   ```objc
   #ifdef __cplusplus
-  #define CKT_EXTERN  extern "C" __attribute__((visibility ("default")))
+  #define CLKY_EXTERN  extern "C" __attribute__((visibility ("default")))
   #else
-  #define CKT_EXTERN  extern __attribute__((visibility ("default")))
+  #define CLKY_EXTERN  extern __attribute__((visibility ("default")))
   #endif
 
-  CKT_EXTERN NSString * selectedFaceIdentifierKey(void);
+  CLKY_EXTERN NSString * selectedFaceIdentifierKey(void);
   ```
 
 ## 3. Calling Private APIs
