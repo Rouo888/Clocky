@@ -9,6 +9,7 @@ UIKIT_EXTERN NS_SWIFT_UI_ACTOR
 - (void)viewDidLoad;
 - (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC;
 - (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^ _Nullable)(void))completion NS_SWIFT_DISABLE_ASYNC;
+@property (nonatomic, readonly) BOOL prefersStatusBarHidden;
 @end
 
 @interface UIViewController (UIContainerViewControllerProtectedMethods)
