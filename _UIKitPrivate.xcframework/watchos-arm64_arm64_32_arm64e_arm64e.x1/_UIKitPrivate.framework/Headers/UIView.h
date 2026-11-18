@@ -18,6 +18,7 @@ typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
 UIKIT_EXTERN NS_SWIFT_UI_ACTOR
 @interface UIView : UIResponder
 @property (nullable, nonatomic, copy) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
 @end
 
 @interface UIView (UIViewGeometry)

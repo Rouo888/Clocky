@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = UIColor.systemBackgroundColor;
     [self configureTapGesture];
 }
 
@@ -47,6 +48,7 @@
     }
     NTKFaceViewController *faceViewController = [[NTKFaceViewController alloc] initWithFace:face configuration:nil];
     [self addChildViewController:faceViewController];
+    faceViewController.view.userInteractionEnabled = NO;
     faceViewController.view.frame = self.view.bounds;
     faceViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:faceViewController.view];
