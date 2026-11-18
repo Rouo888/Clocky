@@ -2,6 +2,7 @@
 #import "Subclasses/UIKitInterfaceGenerator.h"
 #import "Subclasses/WatchKitInterfaceGenerator.h"
 #import "Subclasses/PepperUICoreInterfaceGenerator.h"
+#import "Subclasses/NanoTimeKitInterfaceGenerator.h"
 
 NSURL * _Nullable resolveURL(const char *path) {
     NSString *string = [[NSString alloc] initWithCString:path encoding:NSUTF8StringEncoding];
@@ -36,6 +37,7 @@ int main(int argc, const char * argv[]) {
     assert([UIKitInterfaceGenerator generateToURL:resolvedURL]);
     assert([WatchKitInterfaceGenerator generateToURL:resolvedURL]);
     assert([PepperUICoreInterfaceGenerator generateToURL:resolvedURL]);
+    assert([NanoTimeKitInterfaceGenerator generateToURL:resolvedURL]);
     
     return EXIT_SUCCESS;
 }

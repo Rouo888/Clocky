@@ -310,7 +310,6 @@
         @"watchos-arm64_arm64_32_arm64e_arm64e.x1": @[
             @"armv7k-apple-watchos",
             @"arm64e-apple-watchos",
-            @"arm64e.x1-apple-watchos",
             @"arm64_32-apple-watchos"
         ],
         @"watchos-arm64_x86_64-simulator": @[
