@@ -25,7 +25,7 @@
     
     CLKDevice *device = CLKDevice.currentDevice;
     NSMutableArray<__kindof NTKFaceBundle *> *faceBundles = [[NSMutableArray alloc] init];
-    [NTKFaceBundleManager.sharedManager enumerateFaceBundlesOnDevice:device withBlock:^(__kindof NTKFaceBundle *faceBundle) {
+    [NTKFaceBundleManager.sharedManager enumerateFaceBundlesOnDevice:device includingLegacy:YES withBlock:^(__kindof NTKFaceBundle *faceBundle) {
         [faceBundles addObject:faceBundle];
     }];
     self.faceBundles = faceBundles;

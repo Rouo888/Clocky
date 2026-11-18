@@ -29,7 +29,7 @@
     
     CLKDevice *device = CLKDevice.currentDevice;
     __block __kindof NTKFaceBundle * _Nullable firstBundle = nil;
-    [NTKFaceBundleManager.sharedManager enumerateFaceBundlesOnDevice:device withBlock:^(__kindof NTKFaceBundle *faceBundle) {
+    [NTKFaceBundleManager.sharedManager enumerateFaceBundlesOnDevice:device includingLegacy:YES withBlock:^(__kindof NTKFaceBundle *faceBundle) {
         if (firstBundle != nil) return;
         firstBundle = [faceBundle retain];
     }];

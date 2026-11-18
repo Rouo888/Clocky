@@ -8,7 +8,9 @@ exports:
     symbols:              [  ]
     objc-classes:         [ NTKFace,
     NTKFaceBundle,
+    NTKFaceBundleLoader,
     NTKFaceBundleManager,
+    NTKFaceDescriptor,
     NTKFaceViewController ]
     objc-ivars:           [  ]
 ...
