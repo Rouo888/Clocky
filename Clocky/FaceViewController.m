@@ -11,7 +11,7 @@
 #import <NanoTimeKit/NanoTimeKit.h>
 
 @interface FaceViewController () <FaceBundleListViewControllerDelegate>
-@property (nullable, nonatomic, retain) NTKFaceViewController *faceViewController;
+@property (nullable, nonatomic, retain, direct) NTKFaceViewController *faceViewController;
 @end
 
 @implementation FaceViewController

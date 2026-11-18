@@ -95,3 +95,9 @@ This document defines the coding conventions, header authoring rules, and archit
 
 - Whenever headers (`.h`) or `.tbd` exports are modified in a custom `.xcframework` (`_UIKitPrivate`, `_WatchKitPrivate`, `PepperUICore`, `NanoTimeKit`), make the primary edits in the `watchos-arm64_x86_64-simulator` slice and run `InterfaceGenerator -p <project_root>` to propagate headers and `.tbd` targets across all slices.
 - Ensure `InterfaceGenerator/Subclasses` only defines generators for the `.xcframework` bundles actively used by the project.
+
+## 8. Direct Objective-C Dispatch
+
+- In app code, prefer `__attribute__((objc_direct))` for internal helper methods and the `direct` property attribute for internal properties when their accessors do not require dynamic dispatch or overriding.
+- Do not use direct dispatch for lifecycle overrides, protocol or delegate callbacks, target-action selectors, notifications, KVC/KVO, swizzled methods, or other methods invoked through the Objective-C runtime.
+- `InterfaceGenerator` is excluded from this convention; preserve its existing dispatch behavior.

@@ -8,8 +8,8 @@
 #import "FaceBundleListViewController.h"
 
 @interface FaceBundleListViewController ()
-@property (nonatomic, retain) NSArray<__kindof NTKFaceBundle *> *faceBundles;
-@property (nonatomic, retain) UICollectionViewCellRegistration *cellRegistration;
+@property (nonatomic, retain, direct) NSArray<__kindof NTKFaceBundle *> *faceBundles;
+@property (nonatomic, retain, direct) UICollectionViewCellRegistration *cellRegistration;
 @end
 
 @implementation FaceBundleListViewController
