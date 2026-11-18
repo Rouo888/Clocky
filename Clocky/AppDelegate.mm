@@ -10,15 +10,15 @@
 
 @implementation AppDelegate
 
++ (void)load {
+    swizzler::NTKFaceDescriptor::isAvailableForDevice::swizzle();
+    swizzler::NTKFace::isRestrictedForDevice::swizzle();
+}
+
 - (void)dealloc {
     _extensionConnection.delegate = nil;
     [_extensionConnection release];
     [super dealloc];
-}
-
-+ (void)load {
-    swizzler::NTKFaceDescriptor::isAvailableForDevice::swizzle();
-    swizzler::NTKFace::isRestrictedForDevice::swizzle();
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> * _Nullable)launchOptions {
