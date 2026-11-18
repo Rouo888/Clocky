@@ -21,7 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self requestMotionPermission];
+    [self showInitialFace];
+    [self configureLongPressGesture];
+}
 
+- (void)requestMotionPermission __attribute__((objc_direct)) {
     if ([CMPedometer isStepCountingAvailable] && [CMPedometer authorizationStatus] == CMAuthorizationStatusNotDetermined) {
         CMPedometer *pedometer = [[CMPedometer alloc] init];
         NSDate *now = [NSDate date];
@@ -32,10 +37,12 @@
         }];
         [pedometer release];
     }
-    
+}
+
+- (void)showInitialFace __attribute__((objc_direct)) {
     CLKDevice *device = CLKDevice.currentDevice;
     NSString * _Nullable selectedFaceIdentifier = [NSUserDefaults.standardUserDefaults stringForKey:selectedFaceIdentifierKey()];
-    
+
     __block __kindof NTKFaceBundle * _Nullable firstBundle = nil;
     __block __kindof NTKFaceBundle * _Nullable matchedBundle = nil;
     
@@ -57,7 +64,9 @@
     }
     [matchedBundle release];
     [firstBundle release];
-    
+}
+
+- (void)configureLongPressGesture __attribute__((objc_direct)) {
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didTriggerLongPressGestureRecognizer:)];
     [self.view addGestureRecognizer:longPressGestureRecognizer];
     [longPressGestureRecognizer release];
@@ -94,7 +103,9 @@
     
     FaceBundleListViewController *listViewController = [[FaceBundleListViewController alloc] init];
     listViewController.delegate = self;
-    [self presentViewController:listViewController animated:YES completion:nil];
+    PUICNavigationController *navigationController = [[PUICNavigationController alloc] initWithRootViewController:listViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
+    [navigationController release];
     [listViewController release];
 }
 

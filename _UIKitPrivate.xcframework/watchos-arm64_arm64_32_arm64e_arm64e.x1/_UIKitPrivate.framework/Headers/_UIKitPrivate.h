@@ -6,6 +6,9 @@
 #import <_UIKitPrivate/UIView.h>
 #import <_UIKitPrivate/UIScrollView.h>
 #import <_UIKitPrivate/UIViewController.h>
+#import <_UIKitPrivate/UINavigationController.h>
+#import <_UIKitPrivate/UINavigationItem.h>
+#import <_UIKitPrivate/UIBarButtonItem.h>
 #import <_UIKitPrivate/UICollectionView.h>
 #import <_UIKitPrivate/UICollectionViewCell.h>
 #import <_UIKitPrivate/UICollectionViewController.h>
@@ -14,6 +17,7 @@
 #import <_UIKitPrivate/UIListContentConfiguration.h>
 #import <_UIKitPrivate/UIGestureRecognizer.h>
 #import <_UIKitPrivate/UILongPressGestureRecognizer.h>
+#import <_UIKitPrivate/UITapGestureRecognizer.h>
 #import <_UIKitPrivate/UIInterface.h>
 #import <_UIKitPrivate/UISceneConfiguration.h>
 #import <_UIKitPrivate/UISceneSession.h>

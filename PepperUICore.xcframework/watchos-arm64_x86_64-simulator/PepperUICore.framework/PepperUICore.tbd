@@ -10,6 +10,8 @@ exports:
       PUICApplication,
       PUICListCollectionViewController,
       PUICListPlatterCell,
-      PUICPlatterCell ]
+      PUICPlatterCell,
+      PUICNavigationController,
+      PUICPageViewController ]
     objc-ivars:           [  ]
 ...

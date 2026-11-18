@@ -19,7 +19,8 @@ swift-abi-version: 7
 exports:
   - targets:         [ i386-watchos-simulator, x86_64-watchos-simulator, arm64-watchos-simulator ]
     symbols:              [  ]
-    objc-classes:         [       UICollectionReusableView,
+    objc-classes:         [       UIBarButtonItem,
+      UICollectionReusableView,
       UICollectionView,
       UICollectionViewCell,
       UICollectionViewCellRegistration,
@@ -32,6 +33,7 @@ exports:
       UISceneConnectionOptions,
       UISceneSession,
       UIScrollView,
+      UITapGestureRecognizer,
       UIView,
       UIViewController,
       UIWindow ]

@@ -27,3 +27,11 @@ The reference also creates an `os_transaction` in `sceneDidBecomeActive:` and in
 - `PUICListCollectionViewController` (subclass of `UICollectionViewController`) provides the native watchOS carousel/list collection view layout (`PUICListCollectionView` + `PUICListCollectionViewLayout`).
 - `PUICListPlatterCell` (subclass of `PUICPlatterCell` -> `UICollectionViewCell`) provides the standard watchOS platter cell appearance.
 - Cells are configured using `UICollectionViewCellRegistration` with `[UIListContentConfiguration _defaultInsetGroupedCellConfiguration]`.
+
+## Face Category Pages
+
+- Clocky's category list is presented inside `PUICNavigationController`; selecting a category pushes a `PUICPageViewController` subclass.
+- Category names and face-bundle identifier mappings are stored in `Clocky/FaceCategories.plist`; unmatched bundles fall into Others. Both screens provide a UIKit cancel bar button to dismiss the presented navigation controller.
+- The page controller supplies lightweight containers per face. Each container creates its `NTKFaceViewController` when appearing and removes it after disappearing to limit memory use; if the default face cannot be created the page remains empty. A tap recognizer forwards the page's face bundle to the existing face-selection delegate.
+- `PUICPageViewController` uses its own `delegate` for page-change callbacks. Clocky's face-selection delegate is named `faceSelectionDelegate` to avoid overwriting it; assigning the category list to `delegate` caused an unrecognized `pageViewController:didChangeToIndex:` selector at runtime.
+- `PUICPageViewController` initialization and `viewControllers` usage follow the `MiscellaneousPepperUICore` example. The lightweight containers are allocated up front, while actual face controllers follow the page appearance lifecycle; watchOS may temporarily show multiple pages during a transition. The effect on peak memory and tap behavior still requires device testing.
