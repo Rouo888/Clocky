@@ -7,6 +7,7 @@
 
 #import "FaceViewController.h"
 #import "FaceBundleListViewController.h"
+#import "Defines.h"
 #import <NanoTimeKit/NanoTimeKit.h>
 
 @interface FaceViewController () <FaceBundleListViewControllerDelegate>
@@ -28,16 +29,29 @@
     [super viewDidLoad];
     
     CLKDevice *device = CLKDevice.currentDevice;
+    NSString * _Nullable selectedFaceIdentifier = [NSUserDefaults.standardUserDefaults stringForKey:selectedFaceIdentifierKey()];
+    
     __block __kindof NTKFaceBundle * _Nullable firstBundle = nil;
+    __block __kindof NTKFaceBundle * _Nullable matchedBundle = nil;
+    
     [NTKFaceBundleManager.sharedManager enumerateFaceBundlesOnDevice:device includingLegacy:YES withBlock:^(__kindof NTKFaceBundle *faceBundle) {
-        if (firstBundle != nil) return;
-        firstBundle = [faceBundle retain];
+        if (firstBundle == nil) {
+            firstBundle = [faceBundle retain];
+        }
+        if (selectedFaceIdentifier != nil && matchedBundle == nil) {
+            NSString * _Nullable identifier = [[faceBundle class] identifier];
+            if ([identifier isEqualToString:selectedFaceIdentifier]) {
+                matchedBundle = [faceBundle retain];
+            }
+        }
     }];
     
-    if (firstBundle != nil) {
-        [self _showFaceFromBundle:firstBundle];
-        [firstBundle release];
+    __kindof NTKFaceBundle * _Nullable initialBundle = matchedBundle != nil ? matchedBundle : firstBundle;
+    if (initialBundle != nil) {
+        [self _showFaceFromBundle:initialBundle];
     }
+    [matchedBundle release];
+    [firstBundle release];
     
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(_didTriggerLongPressGestureRecognizer:)];
     [self.view addGestureRecognizer:longPressGestureRecognizer];
@@ -82,6 +96,11 @@
 #pragma mark - FaceBundleListViewControllerDelegate
 
 - (void)faceBundleListViewController:(FaceBundleListViewController *)viewController didSelectFaceBundle:(__kindof NTKFaceBundle *)faceBundle {
+    NSString * _Nullable identifier = [[faceBundle class] identifier];
+    if (identifier != nil) {
+        [NSUserDefaults.standardUserDefaults setObject:identifier forKey:selectedFaceIdentifierKey()];
+    }
+    
     [self _showFaceFromBundle:faceBundle];
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
