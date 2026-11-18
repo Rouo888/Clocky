@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import <NanoTimeKit/CLKDevice.h>
+#import <_ClockKitPrivate/CLKDevice.h>
 #import <NanoTimeKit/NTKFace.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)

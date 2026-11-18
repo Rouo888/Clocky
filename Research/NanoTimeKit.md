@@ -8,6 +8,7 @@
 
 ### `CLKDevice` (`ClockKit.framework`)
 - Exported by `/System/Library/Frameworks/ClockKit.framework/ClockKit` (though omitted from public watchOS `ClockKit` headers).
+- Declared in `_ClockKitPrivate.xcframework`, whose linker stub points to the system ClockKit framework; NanoTimeKit headers import that declaration where needed.
 - `+ (CLKDevice *)currentDevice` returns the active device configuration descriptor used throughout `NanoTimeKit` for querying device capabilities, screen metrics, and face compatibility.
 
 ### `NTKFaceBundleManager`

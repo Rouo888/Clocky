@@ -4,7 +4,7 @@ This document defines the coding conventions, header authoring rules, and archit
 
 ## 1. Language, Deployment Target & Memory Management
 
-- **No SwiftUI**: The project is written strictly in Objective-C (`.m`) and Objective-C++ (`.mm`) using UIKit (`_UIKitPrivate`), `PepperUICore`, `_WatchKitPrivate`, and `NanoTimeKit`.
+- **No SwiftUI**: The project is written strictly in Objective-C (`.m`) and Objective-C++ (`.mm`) using UIKit (`_UIKitPrivate`), ClockKit (`_ClockKitPrivate`), `PepperUICore`, `_WatchKitPrivate`, and `NanoTimeKit`.
 - **Minimum Deployment Target**: `watchOS 9.0` (`WATCHOS_DEPLOYMENT_TARGET = 9.0`, the minimum watchOS version supported by Xcode 27.3).
 - **Manual Retain-Release (MRR / Non-ARC)**:
   - ARC is disabled (`CLANG_ENABLE_OBJC_ARC = NO`).
@@ -34,6 +34,7 @@ This document defines the coding conventions, header authoring rules, and archit
 - **Minimal Declarations**:
   - Only declare the classes, protocols, properties, methods, and enums in private `.h` files that are actually used by the project. Do not dump unused methods or remove needed ones.
   - Omit unnecessary comments in recreated SDK/private headers.
+  - Place each declaration in the header and framework that actually owns it, not merely the framework that uses it. Verify ownership against SDK exports or runtime binaries, and import the owning framework's header where needed. For example, `CLKDevice` belongs to ClockKit and is declared in `_ClockKitPrivate`, not NanoTimeKit.
 
 ## 4. Private Header (`.h`) Authoring Rules
 
@@ -93,7 +94,7 @@ This document defines the coding conventions, header authoring rules, and archit
 
 ## 7. Synchronizing XCFrameworks with `InterfaceGenerator`
 
-- Whenever headers (`.h`) or `.tbd` exports are modified in a custom `.xcframework` (`_UIKitPrivate`, `_WatchKitPrivate`, `PepperUICore`, `NanoTimeKit`), make the primary edits in the `watchos-arm64_x86_64-simulator` slice and run `InterfaceGenerator -p <project_root>` to propagate headers and `.tbd` targets across all slices.
+- Whenever headers (`.h`) or `.tbd` exports are modified in a custom `.xcframework` (`_UIKitPrivate`, `_WatchKitPrivate`, `_ClockKitPrivate`, `PepperUICore`, `NanoTimeKit`), make the primary edits in the `watchos-arm64_x86_64-simulator` slice and run `InterfaceGenerator -p <project_root>` to propagate headers and `.tbd` targets across all slices.
 - Ensure `InterfaceGenerator/Subclasses` only defines generators for the `.xcframework` bundles actively used by the project.
 
 ## 8. Direct Objective-C Dispatch

@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import <NanoTimeKit/CLKDevice.h>
+#import <_ClockKitPrivate/CLKDevice.h>
 #import <NanoTimeKit/NTKFaceBundle.h>
 #import <NanoTimeKit/NTKFaceBundleLoader.h>
 
