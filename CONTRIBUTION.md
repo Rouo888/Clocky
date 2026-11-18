@@ -48,6 +48,7 @@ This document defines the coding conventions, header authoring rules, and archit
   - Wrap headers in `NS_HEADER_AUDIT_BEGIN(nullability, sendability)` / `NS_HEADER_AUDIT_END(nullability, sendability)` (or `NS_ASSUME_NONNULL_BEGIN` / `NS_ASSUME_NONNULL_END`).
   - Never use untyped `id` out of convenience. Always specify the exact class or protocol type.
   - Annotate nullable parameters, return types, and properties explicitly with `_Nullable` / `nullable`.
+  - For local variables only, an explicit `_Nullable` annotation may be omitted when the value is immediately checked with an assertion before use, such as `Method method = class_getInstanceMethod(...); assert(method != NULL);`. This does not change the nullability of properties or API contracts. Assertions can be disabled in release builds, so use a runtime check instead when a missing value must be handled safely in production.
   - Use `__kindof` where polymorphic subclasses are returned or passed (e.g., `__kindof NTKFaceBundle *`, `__kindof NTKFace *`, `__kindof UICollectionViewCell *`).
 - **`NS_NOESCAPE` on Synchronous Blocks**:
   - Annotate non-escaping block parameters (such as enumeration blocks or synchronous configuration blocks) with `NS_NOESCAPE`, e.g.:

@@ -6,6 +6,7 @@
 //
 
 #import "FaceBundleListViewController.h"
+#include <assert.h>
 
 @interface FaceBundleListViewController ()
 @property (nullable, nonatomic, copy, direct) NSArray<__kindof NTKFaceBundle *> *faceBundles;
@@ -55,15 +56,15 @@
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCellRegistration * _Nullable cellRegistration = self.cellRegistration;
-    NSArray<__kindof NTKFaceBundle *> * _Nullable faceBundles = self.faceBundles;
-    NSCAssert(cellRegistration != nil && faceBundles != nil, @"Collection view data must be initialized in viewDidLoad");
+    UICollectionViewCellRegistration *cellRegistration = self.cellRegistration;
+    NSArray<__kindof NTKFaceBundle *> *faceBundles = self.faceBundles;
+    assert(cellRegistration != nil && faceBundles != nil);
     return [collectionView dequeueConfiguredReusableCellWithRegistration:cellRegistration forIndexPath:indexPath item:faceBundles[indexPath.item]];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray<__kindof NTKFaceBundle *> * _Nullable faceBundles = self.faceBundles;
-    NSCAssert(faceBundles != nil, @"Collection view data must be initialized in viewDidLoad");
+    NSArray<__kindof NTKFaceBundle *> *faceBundles = self.faceBundles;
+    assert(faceBundles != nil);
     __kindof NTKFaceBundle *faceBundle = faceBundles[indexPath.item];
     id<FaceBundleListViewControllerDelegate> delegate = self.delegate;
     if ([delegate respondsToSelector:@selector(faceBundleListViewController:didSelectFaceBundle:)]) {
