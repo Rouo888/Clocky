@@ -49,4 +49,8 @@
     return nil;
 }
 
+- (void)applicationWillSuspend:(UIApplication *)application {
+    // noop
+}
+
 @end
