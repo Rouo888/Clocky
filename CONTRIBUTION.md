@@ -14,6 +14,10 @@ For watchOS UI, prefer an available, suitable PepperUICore component over its ge
   - ARC is disabled (`CLANG_ENABLE_OBJC_ARC = NO`).
   - Manage object lifetimes explicitly using `retain`, `release`, `autorelease`, and `[super dealloc]` in `-dealloc`.
   - Instantiate objects with `[[Class alloc] init]` (or the appropriate designated initializer) instead of `[Class new]`; declarations that make `+new` unavailable are unaffected.
+  - When a class requires a custom initializer to establish its invariants, mark plain `-init`, `+new`, and any other inherited initializers that bypass those invariants as `NS_UNAVAILABLE`.
+  - Prefer property setters over direct instance-variable assignment, including in initializers when it is safe. Use direct ivar access when required to avoid unsafe dynamic dispatch or side effects during initialization, and in `dealloc` for releasing owned objects.
+- **Mutable Collection Capacity**:
+  - When the expected collection size is known or reasonably bounded, initialize mutable collections with an appropriate capacity, such as `initWithCapacity:`, rather than the default initializer.
 - **Copyable Properties**:
   - Prefer `copy` for writable properties whose values support `NSCopying`, including strings and collections, when the property represents a value or snapshot. A collection copy is shallow and does not copy its elements.
   - Use `retain` or another appropriate ownership policy when object identity, shared mutation, or mutable property semantics are required; `NSCopying` conformance alone does not make copying appropriate. Preserve the actual ownership semantics of framework declarations, delegate properties, and other externally defined APIs.
