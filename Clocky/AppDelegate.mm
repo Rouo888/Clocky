@@ -84,6 +84,7 @@
 }
 
 - (void)extensionConnectionApplicationDidEndSuspendedLaunch:(SPExtensionConnection *)extensionConnection {
+    // noop
 }
 
 @end
