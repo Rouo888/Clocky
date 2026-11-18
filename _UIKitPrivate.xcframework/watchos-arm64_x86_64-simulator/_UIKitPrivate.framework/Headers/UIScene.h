@@ -9,6 +9,9 @@ NS_SWIFT_UI_ACTOR
 @protocol UISceneDelegate <NSObject>
 @optional
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions;
+- (void)sceneDidBecomeActive:(UIScene *)scene;
+- (void)sceneWillEnterForeground:(UIScene *)scene;
+- (void)sceneDidEnterBackground:(UIScene *)scene;
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

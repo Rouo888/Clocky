@@ -2,6 +2,8 @@
 
 This document defines the coding conventions, header authoring rules, and architectural guidelines for **Clocky**.
 
+For PepperUICore information and examples of UIKit-based watchOS apps, see [MiscellaneousPepperUICore](https://github.com/pookjw/MiscellaneousWWDC25/tree/main/MiscellaneousPepperUICore).
+
 ## 1. Language, Deployment Target & Memory Management
 
 - **No SwiftUI**: The project is written strictly in Objective-C (`.m`) and Objective-C++ (`.mm`) using UIKit (`_UIKitPrivate`), ClockKit (`_ClockKitPrivate`), `PepperUICore`, `_WatchKitPrivate`, and `NanoTimeKit`.
@@ -9,6 +11,7 @@ This document defines the coding conventions, header authoring rules, and archit
 - **Manual Retain-Release (MRR / Non-ARC)**:
   - ARC is disabled (`CLANG_ENABLE_OBJC_ARC = NO`).
   - Manage object lifetimes explicitly using `retain`, `release`, `autorelease`, and `[super dealloc]` in `-dealloc`.
+  - Instantiate objects with `[[Class alloc] init]` (or the appropriate designated initializer) instead of `[Class new]`; declarations that make `+new` unavailable are unaffected.
 - **Copyable Properties**:
   - Prefer `copy` for writable properties whose values support `NSCopying`, including strings and collections, when the property represents a value or snapshot. A collection copy is shallow and does not copy its elements.
   - Use `retain` or another appropriate ownership policy when object identity, shared mutation, or mutable property semantics are required; `NSCopying` conformance alone does not make copying appropriate. Preserve the actual ownership semantics of framework declarations, delegate properties, and other externally defined APIs.
@@ -41,6 +44,8 @@ This document defines the coding conventions, header authoring rules, and archit
   - Only declare the classes, protocols, properties, methods, and enums in private `.h` files that are actually used by the project. Do not dump unused methods or remove needed ones.
   - Omit unnecessary comments in recreated SDK/private headers.
   - Place each declaration in the header and framework that actually owns it, not merely the framework that uses it. Verify ownership against SDK exports or runtime binaries, and import the owning framework's header where needed. For example, `CLKDevice` belongs to ClockKit and is declared in `_ClockKitPrivate`, not NanoTimeKit.
+  - Keep distinct classes and protocols in their own appropriately named headers rather than combining unrelated definitions in one file. Use forward declarations and imports for dependencies, and match the original framework's header layout when known.
+  - When a used symbol from a public framework such as UIKit or WatchKit fails to link through its corresponding `_Private` XCFramework, add the symbol to that XCFramework's `.tbd` in the section for the actual exporting framework. Verify the export against the SDK or runtime binary first; do not assume every declared symbol is exported. Synchronize the slices using `InterfaceGenerator`.
 
 ## 4. Private Header (`.h`) Authoring Rules
 
@@ -48,8 +53,12 @@ This document defines the coding conventions, header authoring rules, and archit
   - Wrap headers in `NS_HEADER_AUDIT_BEGIN(nullability, sendability)` / `NS_HEADER_AUDIT_END(nullability, sendability)` (or `NS_ASSUME_NONNULL_BEGIN` / `NS_ASSUME_NONNULL_END`).
   - Never use untyped `id` out of convenience. Always specify the exact class or protocol type.
   - Annotate nullable parameters, return types, and properties explicitly with `_Nullable` / `nullable`.
+  - Reproduce the original API's nullability, including nullable block pointers, block parameters, collection elements, and `null_resettable` properties where applicable. Check SDK headers or runtime behavior; do not infer nonnull solely from a convenient call site. If a private contract cannot be verified, document the uncertainty rather than presenting a guess as fact.
   - For local variables only, an explicit `_Nullable` annotation may be omitted when the value is immediately checked with an assertion before use, such as `Method method = class_getInstanceMethod(...); assert(method != NULL);`. This does not change the nullability of properties or API contracts. Assertions can be disabled in release builds, so use a runtime check instead when a missing value must be handled safely in production.
   - Use `__kindof` where polymorphic subclasses are returned or passed (e.g., `__kindof NTKFaceBundle *`, `__kindof NTKFace *`, `__kindof UICollectionViewCell *`).
+- **Protocol Requirements**:
+  - Reproduce the original protocol's required and optional members; mark each section explicitly with `@required` or `@optional` instead of relying on Objective-C's default. Verify the classification against SDK headers or runtime metadata where available, and document uncertainties for private protocols.
+  - Do not apply the project's optional-delegate convention to system protocols without checking their actual contract.
 - **`NS_NOESCAPE` on Synchronous Blocks**:
   - Annotate non-escaping block parameters (such as enumeration blocks or synchronous configuration blocks) with `NS_NOESCAPE`, e.g.:
     ```objc

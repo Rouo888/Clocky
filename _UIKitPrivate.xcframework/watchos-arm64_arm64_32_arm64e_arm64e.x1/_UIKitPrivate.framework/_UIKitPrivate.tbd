@@ -19,6 +19,21 @@ swift-abi-version: 7
 exports:
   - targets:         [ armv7k-watchos, arm64-watchos, arm64e-watchos, arm64e.x1-watchos, arm64_32-watchos ]
     symbols:              [  ]
-    objc-classes:         [ UICollectionReusableView, UICollectionView, UICollectionViewCell, UICollectionViewCellRegistration, UICollectionViewController, UIColor, UIGestureRecognizer, UIListContentConfiguration, UILongPressGestureRecognizer, UISceneConfiguration, UISceneConnectionOptions, UISceneSession, UIScrollView, UIView, UIViewController, UIWindow ]
+    objc-classes:         [       UICollectionReusableView,
+      UICollectionView,
+      UICollectionViewCell,
+      UICollectionViewCellRegistration,
+      UICollectionViewController,
+      UIColor,
+      UIGestureRecognizer,
+      UIListContentConfiguration,
+      UILongPressGestureRecognizer,
+      UISceneConfiguration,
+      UISceneConnectionOptions,
+      UISceneSession,
+      UIScrollView,
+      UIView,
+      UIViewController,
+      UIWindow ]
     objc-ivars:           [  ]
 ...

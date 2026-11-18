@@ -11,16 +11,36 @@
 
 @interface AppDelegate ()
 @property (nonatomic) BOOL hasReceivedNonClockKitEvent;
+@property (nonatomic) BOOL launchedSuspendedNotInDock;
+@property (nullable, nonatomic, retain, readwrite) SPExtensionConnection *extensionConnection;
 @end
 
 @implementation AppDelegate
+
+- (void)dealloc {
+    _extensionConnection.delegate = nil;
+    [_extensionConnection release];
+    [super dealloc];
+}
 
 + (void)load {
     swizzler::NTKFaceDescriptor::isAvailableForDevice::swizzle();
     swizzler::NTKFace::isRestrictedForDevice::swizzle();
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> * _Nullable)launchOptions {
+    NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier;
+    if (bundleIdentifier == nil) {
+        NSLog(@"Cannot initialize the WatchKit connection without a bundle identifier");
+        return NO;
+    }
+    SPExtensionConnection *connection = [[SPExtensionConnection alloc] init];
+    connection.delegate = self;
+    connection.inSuspendedLaunch = YES;
+    [connection setUpNativeAppWithServerIdentifer:bundleIdentifier];
+    self.extensionConnection = connection;
+    [connection release];
+
     NSURL *scCacheURL = [[NSFileManager.defaultManager URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask].firstObject URLByAppendingPathComponent:@"Saved Application State" isDirectory:YES];
     [NSFileManager.defaultManager removeItemAtURL:scCacheURL error:NULL];
     
@@ -42,11 +62,16 @@
 }
 
 - (void)didReceiveNonClockKitEvent {
-    // noop
+    NSString * _Nullable identifier = NSBundle.mainBundle.bundleIdentifier;
+    if (identifier == nil || self.extensionConnection == nil) {
+        NSLog(@"Cannot connect the WatchKit extension");
+        return;
+    }
+    [self.extensionConnection connectWithIdentifier:identifier completion:^{}];
 }
 
 - (id _Nullable)extendLaunchTest {
-    return nil;
+    return [self.extensionConnection extendLaunchTest];
 }
 
 - (void)applicationWillSuspend:(UIApplication *)application {
@@ -55,6 +80,17 @@
 
 - (UIWindow * _Nullable)window {
     return nil;
+}
+
+- (void)handleWatchActions:(NSSet<NSObject *> *)watchActions completion:(void (^)(void))completion {
+    completion();
+}
+
+- (void)extensionConnection:(SPExtensionConnection *)extensionConnection directXPCSetupDidFailWithError:(NSError *)error {
+    NSLog(@"WatchKit connection setup failed: %@", error);
+}
+
+- (void)extensionConnectionApplicationDidEndSuspendedLaunch:(SPExtensionConnection *)extensionConnection {
 }
 
 @end

@@ -5,11 +5,13 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UISceneConfiguration, UISceneSession, UISceneConnectionOptions;
+@protocol UIApplicationDelegate;
 
 UIKIT_EXTERN int UIApplicationMain(int argc, char * _Nullable argv[_Nonnull], NSString * _Nullable principalClassName, NSString * _Nullable delegateClassName);
 
 UIKIT_EXTERN NS_SWIFT_UI_ACTOR
 @interface UIApplication : UIResponder
+@property (nullable, nonatomic, assign) id<UIApplicationDelegate> delegate;
 @end
 
 typedef NSString * UIApplicationLaunchOptionsKey NS_TYPED_ENUM;

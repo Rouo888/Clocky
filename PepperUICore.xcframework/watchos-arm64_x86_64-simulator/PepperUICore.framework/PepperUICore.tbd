@@ -6,10 +6,10 @@ swift-abi-version: 7
 exports:
   - targets:         [ i386-watchos-simulator, x86_64-watchos-simulator, arm64-watchos-simulator ]
     symbols:              [  ]
-    objc-classes:         [ PUICApplicationSceneSpecification,
-    PUICApplication,
-    PUICListCollectionViewController,
-    PUICListPlatterCell,
-    PUICPlatterCell ]
+    objc-classes:         [       PUICApplicationSceneSpecification,
+      PUICApplication,
+      PUICListCollectionViewController,
+      PUICListPlatterCell,
+      PUICPlatterCell ]
     objc-ivars:           [  ]
 ...
