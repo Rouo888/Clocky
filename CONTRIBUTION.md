@@ -4,6 +4,8 @@ This document defines the coding conventions, header authoring rules, and archit
 
 For PepperUICore information and examples of UIKit-based watchOS apps, see [MiscellaneousPepperUICore](https://github.com/pookjw/MiscellaneousWWDC25/tree/main/MiscellaneousPepperUICore).
 
+For watchOS UI, prefer an available, suitable PepperUICore component over its generic UIKit counterpart—for example, use `PUICListCollectionViewController` instead of `UICollectionViewController` for a native watch-style list.
+
 ## 1. Language, Deployment Target & Memory Management
 
 - **No SwiftUI**: The project is written strictly in Objective-C (`.m`) and Objective-C++ (`.mm`). The watch app uses UIKit (`_UIKitPrivate`), ClockKit (`_ClockKitPrivate`), `PepperUICore`, `_WatchKitPrivate`, and `NanoTimeKit`; the iOS companion uses public UIKit.
