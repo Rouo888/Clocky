@@ -9,6 +9,9 @@ This document defines the coding conventions, header authoring rules, and archit
 - **Manual Retain-Release (MRR / Non-ARC)**:
   - ARC is disabled (`CLANG_ENABLE_OBJC_ARC = NO`).
   - Manage object lifetimes explicitly using `retain`, `release`, `autorelease`, and `[super dealloc]` in `-dealloc`.
+- **Copyable Properties**:
+  - Prefer `copy` for writable properties whose values support `NSCopying`, including strings and collections, when the property represents a value or snapshot. A collection copy is shallow and does not copy its elements.
+  - Use `retain` or another appropriate ownership policy when object identity, shared mutation, or mutable property semantics are required; `NSCopying` conformance alone does not make copying appropriate. Preserve the actual ownership semantics of framework declarations, delegate properties, and other externally defined APIs.
 
 ## 2. Constants & Extern Declarations (`Defines.h`)
 
