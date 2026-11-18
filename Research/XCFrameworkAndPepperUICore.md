@@ -32,8 +32,7 @@ When `xcodebuild -create-xcframework` packages a watchOS framework containing `a
 
 ## InterfaceGenerator Workflow
 
-- `InterfaceGenerator` is a macOS command-line tool target in `Clocky.xcodeproj` (`InterfaceGenerator -p <project_root>`) that keeps the custom `.xcframework` definitions (`_UIKitPrivate`, `_WatchKitPrivate`, `PepperUICore`, `NanoTimeKit`) synchronized with the active Xcode SDK.
-- Using `watchos-arm64_x86_64-simulator` (`arm64-apple-watchos-simulator`) as the base slice:
-  1. It reads the active Xcode SDK's `.swiftinterface` header comments (falling back to `SwiftUICore.framework` for private frameworks) and updates the compiler version, target triple (e.g., `watchos27.3`), and module flags across all simulator and device `.swiftinterface` variants.
-  2. It copies `Headers/` from the base simulator slice to `watchos-arm64_arm64_32_arm64e_arm64e.x1`.
-  3. It rewrites the `.tbd` target list from the simulator targets (`i386-watchos-simulator, x86_64-watchos-simulator, arm64-watchos-simulator`) to the device targets (`armv7k-watchos, arm64-watchos, arm64e-watchos, arm64e.x1-watchos, arm64_32-watchos`).
+- `InterfaceGenerator` is a macOS command-line tool target in `Clocky.xcodeproj` (`InterfaceGenerator -p <project_root>`) that keeps the custom `.xcframework` definitions (`_UIKitPrivate`, `_WatchKitPrivate`, `PepperUICore`, `NanoTimeKit`) synchronized across slices.
+- Using `watchos-arm64_x86_64-simulator` as the base slice:
+  1. It copies `Headers/` from the base simulator slice to `watchos-arm64_arm64_32_arm64e_arm64e.x1`.
+  2. It rewrites the `.tbd` target list from the simulator targets (`i386-watchos-simulator, x86_64-watchos-simulator, arm64-watchos-simulator`) to the device targets (`armv7k-watchos, arm64-watchos, arm64e-watchos, arm64e.x1-watchos, arm64_32-watchos`).

@@ -93,5 +93,5 @@ This document defines the coding conventions, header authoring rules, and archit
 
 ## 7. Synchronizing XCFrameworks with `InterfaceGenerator`
 
-- Whenever headers (`.h`), `.tbd` exports, or `.swiftinterface` declarations are modified in a custom `.xcframework` (`_UIKitPrivate`, `_WatchKitPrivate`, `PepperUICore`, `NanoTimeKit`), make the primary edits in the `watchos-arm64_x86_64-simulator` slice and run `InterfaceGenerator -p <project_root>` to propagate headers, `.tbd` targets, and current Xcode SDK `.swiftinterface` headers across all slices.
+- Whenever headers (`.h`) or `.tbd` exports are modified in a custom `.xcframework` (`_UIKitPrivate`, `_WatchKitPrivate`, `PepperUICore`, `NanoTimeKit`), make the primary edits in the `watchos-arm64_x86_64-simulator` slice and run `InterfaceGenerator -p <project_root>` to propagate headers and `.tbd` targets across all slices.
 - Ensure `InterfaceGenerator/Subclasses` only defines generators for the `.xcframework` bundles actively used by the project.
