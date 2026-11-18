@@ -74,6 +74,7 @@
           "@executable_path/Frameworks",
         ],
         "MARKETING_VERSION": "1.0",
+        "OTHER_LDFLAGS": [ "$(inherited)", "-framework", "ClockKit" ],
         "PRODUCT_BUNDLE_IDENTIFIER": "com.pookjw.Clocky.watchkitapp",
         "PRODUCT_NAME": "$(TARGET_NAME)",
         "SDKROOT": "watchos",

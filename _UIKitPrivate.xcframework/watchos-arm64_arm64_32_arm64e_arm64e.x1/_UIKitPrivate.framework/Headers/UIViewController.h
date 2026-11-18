@@ -9,4 +9,12 @@ UIKIT_EXTERN NS_SWIFT_UI_ACTOR
 - (void)viewDidLoad;
 @end
 
+@interface UIViewController (UIContainerViewControllerProtectedMethods)
+- (void)addChildViewController:(UIViewController *)childController;
+@end
+
+@interface UIViewController (UIContainerViewControllerCallbacks)
+- (void)didMoveToParentViewController:(nullable UIViewController *)parent;
+@end
+
 NS_HEADER_AUDIT_END(nullability, sendability)

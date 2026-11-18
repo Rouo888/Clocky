@@ -3,11 +3,31 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
+    UIViewAutoresizingNone                 = 0,
+    UIViewAutoresizingFlexibleLeftMargin   = 1 << 0,
+    UIViewAutoresizingFlexibleWidth        = 1 << 1,
+    UIViewAutoresizingFlexibleRightMargin  = 1 << 2,
+    UIViewAutoresizingFlexibleTopMargin    = 1 << 3,
+    UIViewAutoresizingFlexibleHeight       = 1 << 4,
+    UIViewAutoresizingFlexibleBottomMargin = 1 << 5
+};
+
 @class UIColor;
 
 UIKIT_EXTERN NS_SWIFT_UI_ACTOR
 @interface UIView : UIResponder
 @property (nullable, nonatomic, copy) UIColor *backgroundColor UI_APPEARANCE_SELECTOR;
+@end
+
+@interface UIView (UIViewGeometry)
+@property (nonatomic) CGRect frame;
+@property (nonatomic) CGRect bounds;
+@property (nonatomic) UIViewAutoresizing autoresizingMask;
+@end
+
+@interface UIView (UIViewHierarchy)
+- (void)addSubview:(UIView *)view;
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)
