@@ -19,6 +19,6 @@ swift-abi-version: 7
 exports:
   - targets:         [ i386-watchos-simulator, x86_64-watchos-simulator, arm64-watchos-simulator ]
     symbols:              [  ]
-    objc-classes:         [ UISceneConfiguration, UISceneConnectionOptions, UISceneSession, UIView, UIViewController, UIWindow, UIColor ]
+    objc-classes:         [ UICollectionReusableView, UICollectionView, UICollectionViewCell, UICollectionViewCellRegistration, UICollectionViewController, UIColor, UIGestureRecognizer, UIListContentConfiguration, UILongPressGestureRecognizer, UISceneConfiguration, UISceneConnectionOptions, UISceneSession, UIScrollView, UIView, UIViewController, UIWindow ]
     objc-ivars:           [  ]
 ...

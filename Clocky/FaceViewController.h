@@ -1,5 +1,5 @@
 //
-//  RootViewController.h
+//  FaceViewController.h
 //  Clocky
 //
 //  Created by Jinwoo Kim on 11/18/26.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RootViewController : UIViewController
+@interface FaceViewController : UIViewController
 @end
 
 NS_ASSUME_NONNULL_END

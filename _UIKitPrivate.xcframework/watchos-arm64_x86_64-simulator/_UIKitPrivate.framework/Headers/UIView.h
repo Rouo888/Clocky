@@ -13,7 +13,7 @@ typedef NS_OPTIONS(NSUInteger, UIViewAutoresizing) {
     UIViewAutoresizingFlexibleBottomMargin = 1 << 5
 };
 
-@class UIColor;
+@class UIColor, UIGestureRecognizer;
 
 UIKIT_EXTERN NS_SWIFT_UI_ACTOR
 @interface UIView : UIResponder
@@ -27,7 +27,12 @@ UIKIT_EXTERN NS_SWIFT_UI_ACTOR
 @end
 
 @interface UIView (UIViewHierarchy)
+- (void)removeFromSuperview;
 - (void)addSubview:(UIView *)view;
+@end
+
+@interface UIView (UIViewGestureRecognizers)
+- (void)addGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer;
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

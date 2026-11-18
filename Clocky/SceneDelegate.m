@@ -6,7 +6,7 @@
 //
 
 #import "SceneDelegate.h"
-#import "RootViewController.h"
+#import "FaceViewController.h"
 
 @implementation SceneDelegate
 
@@ -18,7 +18,7 @@
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     UIWindow *window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
     
-    RootViewController *rootViewController = [[RootViewController alloc] init];
+    FaceViewController *rootViewController = [[FaceViewController alloc] init];
     window.rootViewController = rootViewController;
     [rootViewController release];
     
