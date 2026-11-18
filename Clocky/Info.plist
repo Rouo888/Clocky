@@ -4,5 +4,7 @@
 <dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict/>
+	<key>WKSupportsAlwaysOnDisplay</key>
+	<true/>
 </dict>
 </plist>
