@@ -6,8 +6,5 @@
     return @"_UIKitPrivate";
 }
 
-+ (NSString *)originalFrameworkName {
-    return @"UIKit";
-}
 
 @end

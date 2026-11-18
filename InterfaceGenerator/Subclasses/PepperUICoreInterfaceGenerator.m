@@ -6,8 +6,5 @@
     return @"PepperUICore";
 }
 
-+ (NSString *)originalFrameworkName {
-    return @"PepperUICore";
-}
 
 @end

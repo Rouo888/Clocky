@@ -14,34 +14,6 @@ Tag xcFrameworkTag = {
 };
 UTType * const UTTypeXCFramework = (UTType *)&xcFrameworkTag;
 
-Tag swiftInterfaceTag = {
-    objc_lookUpClass("_UTCoreType"),
-    NULL,
-    @"public.swift-interface"
-};
-UTType * const UTTypeSwiftInterface = (UTType *)&swiftInterfaceTag;
-
-Tag swiftModuleTag = {
-    objc_lookUpClass("_UTCoreType"),
-    NULL,
-    @"dyn.ah62d4rv4ge81g75mq34g455esz0gn"
-};
-UTType * const UTTypeSwiftModule = (UTType *)&swiftModuleTag;
-
-Tag platformTag = {
-    objc_lookUpClass("_UTCoreType"),
-    NULL,
-    @"dyn.ah62d4rv4ge81a5dbsvxg86xr"
-};
-UTType * const UTTypePlatform = (UTType *)&platformTag;
-
-Tag sdkTag = {
-    objc_lookUpClass("_UTCoreType"),
-    NULL,
-    @"dyn.ah62d4rv4ge81g3dp"
-};
-UTType * const UTTypeSDK = (UTType *)&sdkTag;
-
 Tag tbdTag = {
     objc_lookUpClass("_UTCoreType"),
     NULL,

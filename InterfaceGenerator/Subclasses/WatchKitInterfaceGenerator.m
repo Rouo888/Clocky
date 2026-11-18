@@ -6,8 +6,5 @@
     return @"_WatchKitPrivate";
 }
 
-+ (NSString *)originalFrameworkName {
-    return @"WatchKit";
-}
 
 @end

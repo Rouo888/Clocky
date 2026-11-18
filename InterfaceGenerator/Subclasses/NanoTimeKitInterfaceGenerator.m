@@ -6,8 +6,5 @@
     return @"NanoTimeKit";
 }
 
-+ (NSString *)originalFrameworkName {
-    return @"NanoTimeKit";
-}
 
 @end
