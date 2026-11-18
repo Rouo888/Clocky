@@ -2,6 +2,7 @@
 #import "FaceBundleListViewController.h"
 #import "Defines.h"
 #import <NanoTimeKit/NanoTimeKit.h>
+#import <CoreMotion/CoreMotion.h>
 
 @interface FaceViewController () <FaceBundleListViewControllerDelegate>
 @property (nullable, nonatomic, retain, direct) NTKFaceViewController *faceViewController;
@@ -20,6 +21,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    if ([CMPedometer isStepCountingAvailable] && [CMPedometer authorizationStatus] == CMAuthorizationStatusNotDetermined) {
+        CMPedometer *pedometer = [[CMPedometer alloc] init];
+        NSDate *now = [NSDate date];
+        [pedometer queryPedometerDataFromDate:[now dateByAddingTimeInterval:-60.0] toDate:now withHandler:^(CMPedometerData * _Nullable data, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"Motion permission request failed: %@", error);
+            }
+        }];
+        [pedometer release];
+    }
     
     CLKDevice *device = CLKDevice.currentDevice;
     NSString * _Nullable selectedFaceIdentifier = [NSUserDefaults.standardUserDefaults stringForKey:selectedFaceIdentifierKey()];
