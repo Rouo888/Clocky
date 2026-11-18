@@ -1,10 +1,3 @@
-//
-//  Swizzler.mm
-//  Clocky
-//
-//  Created by Jinwoo Kim on 11/18/26.
-//
-
 #import "Swizzler.h"
 #include <objc/runtime.h>
 #include <objc/message.h>

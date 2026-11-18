@@ -1,10 +1,3 @@
-//
-//  FaceBundleListViewController.h
-//  Clocky
-//
-//  Created by Jinwoo Kim on 11/18/26.
-//
-
 #import <PepperUICore/PepperUICore.h>
 #import <NanoTimeKit/NanoTimeKit.h>
 

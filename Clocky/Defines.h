@@ -1,10 +1,3 @@
-//
-//  Defines.h
-//  Clocky
-//
-//  Created by Jinwoo Kim on 11/18/26.
-//
-
 #import <Foundation/Foundation.h>
 
 #ifdef __cplusplus

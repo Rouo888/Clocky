@@ -1,10 +1,3 @@
-//
-//  main.m
-//  Clocky
-//
-//  Created by Jinwoo Kim on 11/18/26.
-//
-
 #import <Foundation/Foundation.h>
 #import <_UIKitPrivate/_UIKitPrivate.h>
 #import <_WatchKitPrivate/_WatchKitPrivate.h>

@@ -1,10 +1,3 @@
-//
-//  FaceBundleListViewController.m
-//  Clocky
-//
-//  Created by Jinwoo Kim on 11/18/26.
-//
-
 #import "FaceBundleListViewController.h"
 #include <assert.h>
 

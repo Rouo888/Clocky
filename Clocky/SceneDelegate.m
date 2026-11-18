@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.m
-//  Clocky
-//
-//  Created by Jinwoo Kim on 11/18/26.
-//
-
 #import "SceneDelegate.h"
 #import "FaceViewController.h"
 #import "AppDelegate.h"

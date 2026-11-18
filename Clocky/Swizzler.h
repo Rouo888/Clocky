@@ -1,10 +1,3 @@
-//
-//  Swizzler.h
-//  Clocky
-//
-//  Created by Jinwoo Kim on 11/18/26.
-//
-
 #import <NanoTimeKit/NanoTimeKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
