@@ -6,8 +6,8 @@ For PepperUICore information and examples of UIKit-based watchOS apps, see [Misc
 
 ## 1. Language, Deployment Target & Memory Management
 
-- **No SwiftUI**: The project is written strictly in Objective-C (`.m`) and Objective-C++ (`.mm`) using UIKit (`_UIKitPrivate`), ClockKit (`_ClockKitPrivate`), `PepperUICore`, `_WatchKitPrivate`, and `NanoTimeKit`.
-- **Minimum Deployment Target**: `watchOS 9.0` (`WATCHOS_DEPLOYMENT_TARGET = 9.0`, the minimum watchOS version supported by Xcode 27.3).
+- **No SwiftUI**: The project is written strictly in Objective-C (`.m`) and Objective-C++ (`.mm`). The watch app uses UIKit (`_UIKitPrivate`), ClockKit (`_ClockKitPrivate`), `PepperUICore`, `_WatchKitPrivate`, and `NanoTimeKit`; the iOS companion uses public UIKit.
+- **Minimum Deployment Targets**: `watchOS 9.0` and `iOS 15.0`, the respective minimum versions supported by Xcode 27.3.
 - **Manual Retain-Release (MRR / Non-ARC)**:
   - ARC is disabled (`CLANG_ENABLE_OBJC_ARC = NO`).
   - Manage object lifetimes explicitly using `retain`, `release`, `autorelease`, and `[super dealloc]` in `-dealloc`.
