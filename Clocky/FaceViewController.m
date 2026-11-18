@@ -41,17 +41,17 @@
     
     __kindof NTKFaceBundle * _Nullable initialBundle = matchedBundle != nil ? matchedBundle : firstBundle;
     if (initialBundle != nil) {
-        [self _showFaceFromBundle:initialBundle];
+        [self showFaceFromBundle:initialBundle];
     }
     [matchedBundle release];
     [firstBundle release];
     
-    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(_didTriggerLongPressGestureRecognizer:)];
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didTriggerLongPressGestureRecognizer:)];
     [self.view addGestureRecognizer:longPressGestureRecognizer];
     [longPressGestureRecognizer release];
 }
 
-- (void)_showFaceFromBundle:(__kindof NTKFaceBundle *)faceBundle __attribute__((objc_direct)) {
+- (void)showFaceFromBundle:(__kindof NTKFaceBundle *)faceBundle __attribute__((objc_direct)) {
     if (self.faceViewController != nil) {
         [self.faceViewController willMoveToParentViewController:nil];
         [self.faceViewController.view removeFromSuperview];
@@ -77,7 +77,7 @@
     [faceViewController release];
 }
 
-- (void)_didTriggerLongPressGestureRecognizer:(UILongPressGestureRecognizer *)sender {
+- (void)didTriggerLongPressGestureRecognizer:(UILongPressGestureRecognizer *)sender {
     if (sender.state != UIGestureRecognizerStateBegan) return;
     
     FaceBundleListViewController *listViewController = [[FaceBundleListViewController alloc] init];
@@ -94,7 +94,7 @@
         [NSUserDefaults.standardUserDefaults setObject:identifier forKey:selectedFaceIdentifierKey()];
     }
     
-    [self _showFaceFromBundle:faceBundle];
+    [self showFaceFromBundle:faceBundle];
     [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
