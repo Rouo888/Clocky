@@ -53,4 +53,8 @@
     // noop
 }
 
+- (UIWindow * _Nullable)window {
+    return nil;
+}
+
 @end
