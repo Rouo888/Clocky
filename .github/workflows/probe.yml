@@ -1,0 +1,9 @@
+name: Runner allocation test
+on:
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: macos-15-intel
+    timeout-minutes: 10
+    steps:
+      - run: echo RUNNER_OK && sw_vers
