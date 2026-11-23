@@ -5,8 +5,8 @@ on:
 
 jobs:
   build:
-    runs-on: macos-26
-    timeout-minutes: 30
+    runs-on: xcode-27
+    timeout-minutes: 60
 
     steps:
       - name: Checkout Clocky (source already contains arm64_32 fix)
