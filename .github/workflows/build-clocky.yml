@@ -25,6 +25,13 @@ jobs:
           echo "=== format fields after downgrade ==="
           grep -nE 'objectVersion|LastUpgradeCheck' Clocky.xcodeproj/project.pbxproj
 
+      - name: Strip Xcode-26-only arch from private framework tbd stubs
+        run: |
+          echo "Removing arm64e.x1-watchos architecture declaration from all .tbd stubs..."
+          find . -name '*.tbd' -print0 | xargs -0 sed -i '' 's/, arm64e\.x1-watchos//g'
+          echo "=== remaining target lines ==="
+          grep -rh '^targets:' --include='*.tbd' . | sort -u
+
       - name: Verify arm64_32 is in the build settings
         run: grep -n "arm64_32" Clocky.xcodeproj/project.pbxproj
 
