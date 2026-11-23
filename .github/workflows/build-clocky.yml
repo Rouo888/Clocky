@@ -1,0 +1,49 @@
+name: Build Clocky with arm64_32
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Clocky (source already contains arm64_32 fix)
+        uses: actions/checkout@v4
+        with:
+          repository: pookjw/Clocky
+          ref: main
+
+      - name: Show available Xcode versions
+        run: ls -d /Applications/Xcode*.app
+
+      - name: Verify arm64_32 is in the build settings
+        run: grep -n "arm64_32" Clocky.xcodeproj/project.pbxproj
+
+      - name: Build unsigned IPA via the official script
+        run: |
+          chmod +x scripts/create_ipa.sh
+          bash scripts/create_ipa.sh \
+            --bundle-id com.example.Clocky \
+            --output build/ipa/Clocky-arm64_32.ipa
+
+      - name: Verify the embedded Watch binary contains arm64_32
+        run: |
+          set -euo pipefail
+          WATCH_APP=$(find build -type d -path '*Watch/Clocky.app' | head -1)
+          echo "Watch app: $WATCH_APP"
+          lipo -info "$WATCH_APP/Clocky"
+          if ! lipo -info "$WATCH_APP/Clocky" | grep -q 'arm64_32'; then
+            echo "ERROR: arm64_32 slice missing from the built Watch binary"
+            exit 1
+          fi
+          echo "OK: arm64_32 slice present"
+
+      - name: Upload the fixed IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Clocky-arm64_32-fixed
+          path: build/ipa/Clocky-arm64_32.ipa
+          if-no-files-found: error
+          retention-days: 30
