@@ -18,6 +18,13 @@ jobs:
       - name: Show available Xcode versions
         run: ls -d /Applications/Xcode*.app
 
+      - name: Downgrade project format for Xcode 16 (Intel runner)
+        run: |
+          sed -i '' 's/objectVersion = 110;/objectVersion = 77;/' Clocky.xcodeproj/project.pbxproj
+          sed -i '' 's/LastUpgradeCheck = 2730;/LastUpgradeCheck = 1600;/' Clocky.xcodeproj/project.pbxproj
+          echo "=== format fields after downgrade ==="
+          grep -nE 'objectVersion|LastUpgradeCheck' Clocky.xcodeproj/project.pbxproj
+
       - name: Verify arm64_32 is in the build settings
         run: grep -n "arm64_32" Clocky.xcodeproj/project.pbxproj
 
